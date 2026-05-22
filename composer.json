@@ -1,0 +1,17 @@
+{
+    "name": "aleksejkukisev/platforma_butler_bot",
+    "autoload": {
+        "psr-4": {
+            "Aleksejkukisev\\PlatformaButlerBot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kukishev Oleksii",
+            "email": "aleksey.kukishev@gmail.com"
+        }
+    ],
+    "require": {
+        "nutgram/nutgram": "^4.46"
+    }
+}

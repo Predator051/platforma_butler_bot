@@ -1,29 +1,24 @@
 <?php
-$botToken = getenv("TELEGRAM_TOKEN");
+require_once __DIR__ . "/vendor/autoload.php";
 
+use SergiX44\Nutgram\Nutgram;
+// use SergiX44\Nutgram\RunningMode\Polling;
+
+$botToken = getenv("TELEGRAM_TOKEN");
 if (!$botToken) {
     error_log("Ошибка: Переменная TELEGRAM_TOKEN не задана!");
     exit();
 }
 
-$website = "https://api.telegram.org/bot" . $botToken;
+$bot = new Nutgram($botToken);
+// $bot->setRunningMode(Polling::class);
 
-$content = file_get_contents("php://input");
-$update = json_decode($content, true);
+$bot->onNewChatMembers(function (Nutgram $bot) {
+    $bot->sendMessage("В полку прибыло! 🫡");
+});
 
-if (!$update) {
-    exit();
-}
+$bot->onCommand("start", function (Nutgram $bot) {
+    $bot->sendMessage("Бот готов к работе в группе!");
+});
 
-if (isset($update["message"]["new_chat_members"])) {
-    $chatId = $update["message"]["chat"]["id"];
-    $text = "В полку прибыло! 🫡";
-
-    $sendUrl =
-        $website .
-        "/sendMessage?chat_id=" .
-        $chatId .
-        "&text=" .
-        urlencode($text);
-    file_get_contents($sendUrl);
-}
+$bot->run();
