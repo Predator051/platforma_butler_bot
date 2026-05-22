@@ -2,6 +2,7 @@
 require_once __DIR__ . "/vendor/autoload.php";
 
 use SergiX44\Nutgram\Nutgram;
+use SergiX44\Nutgram\RunningMode\Webhook;
 // use SergiX44\Nutgram\RunningMode\Polling;
 
 $botToken = getenv("TELEGRAM_TOKEN");
@@ -11,7 +12,7 @@ if (!$botToken) {
 }
 
 $bot = new Nutgram($botToken);
-// $bot->setRunningMode(Polling::class);
+$bot->setRunningMode(Webhook::class);
 
 $bot->onNewChatMembers(function (Nutgram $bot) {
     $bot->sendMessage("В полку прибыло! 🫡");
