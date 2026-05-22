@@ -15,11 +15,11 @@ $bot = new Nutgram($botToken);
 $bot->setRunningMode(Webhook::class);
 
 $bot->onNewChatMembers(function (Nutgram $bot) {
-    $bot->sendMessage("В полку прибыло! 🫡");
+    $bot->sendMessage("Нашого полку прибуло! 🫡");
 });
 
 $bot->onCommand("start", function (Nutgram $bot) {
-    $bot->sendMessage("Бот готов к работе в группе!");
+    $bot->sendMessage("Бот готовий до роботи в підрозділі!");
 });
 
 $bot->run();
